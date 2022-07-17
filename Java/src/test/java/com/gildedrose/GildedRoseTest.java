@@ -230,44 +230,41 @@ class GildedRoseTest {
         assertEquals(11, app.items[0].quality);
         assertEquals(12, app.items[1].quality);
         assertEquals(13, app.items[2].quality);
+        //Event tonight
         assertEquals(13, app.items[3].quality);
         assertEquals(0, app.items[4].quality);
         
         app.updateQuality();
         assertEquals(13, app.items[0].quality);
         assertEquals(15, app.items[1].quality);
+        //Event tonight
         assertEquals(16, app.items[2].quality);
         assertEquals(0, app.items[3].quality);
-        assertEquals(0, app.items[4].quality);
         
         app.updateQuality();
         assertEquals(15, app.items[0].quality);
-        assertEquals(17, app.items[1].quality);
+        assertEquals(18, app.items[1].quality);
         assertEquals(0, app.items[2].quality);
-        assertEquals(0, app.items[3].quality);
-        assertEquals(0, app.items[4].quality);
         
         app.updateQuality();
         app.updateQuality();
         app.updateQuality();
-        assertEquals(21, app.items[0].quality);
-        assertEquals(26, app.items[1].quality);
-        assertEquals(0, app.items[2].quality);
-        assertEquals(0, app.items[3].quality);
-        assertEquals(0, app.items[4].quality);
-        
         app.updateQuality();
         assertEquals(24, app.items[0].quality);
-        assertEquals(0, app.items[1].quality);
-        assertEquals(0, app.items[2].quality);
-        assertEquals(0, app.items[3].quality);
-        assertEquals(0, app.items[4].quality);
+        //Event tonight
+        assertEquals(30, app.items[1].quality);
         
         app.updateQuality();
+        assertEquals(27, app.items[0].quality);
+        assertEquals(0, app.items[1].quality);
+
         app.updateQuality();
         app.updateQuality();
         app.updateQuality();
         app.updateQuality();
+        //Event tonight
+        assertEquals(39, app.items[0].quality);
+        
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
         assertEquals(0, app.items[1].quality);

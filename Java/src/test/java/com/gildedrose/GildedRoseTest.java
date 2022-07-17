@@ -261,11 +261,12 @@ class GildedRoseTest {
         app.updateQuality();
         app.updateQuality();
         app.updateQuality();
+        app.updateQuality();
         //Event tonight
-        assertEquals(36, app.items[0].quality);
+        assertEquals(39, app.items[0].quality);
         
         app.updateQuality();
-        assertEquals(39, app.items[0].quality);
+        assertEquals(0, app.items[0].quality);
         assertEquals(0, app.items[1].quality);
         assertEquals(0, app.items[2].quality);
         assertEquals(0, app.items[3].quality);

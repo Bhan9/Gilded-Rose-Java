@@ -11,6 +11,7 @@ class GildedRose {
     private final String BACKSTAGEPASS = "backstage pass";
     private final String AGEDBRIE = "aged brie";
     private final String BASIC = "basic";
+    private final String CONJURED = "conjured";
     
     private final int LEGENDARYQUALITY = 80;
     private final int MAXQUALITY = 50;
@@ -40,6 +41,9 @@ class GildedRose {
     		else if (itemType.equalsIgnoreCase(SULFURAS)){
     			items[i] = updateSulfurasItem(currentItem);
     		}
+    		else if (itemType.equalsIgnoreCase(CONJURED)){
+    			items[i] = updateConjuredItem(currentItem);
+    		}
     		else {
     			log.warning("Unidentified Item type during update: " + itemType + " for Item: " + currentItem.toString());
     		}
@@ -67,6 +71,9 @@ class GildedRose {
     		}
     		else if (itemType.equalsIgnoreCase(SULFURAS)){
     			items[i] = validateSulfurasItem(currentItem);
+    		}
+    		else if (itemType.equalsIgnoreCase(CONJURED)){
+    			items[i] = validateConjuredItem(currentItem);
     		}
     		else {
     			log.warning("Unidentified Item type during validation: " + itemType + " for Item: " + currentItem.toString());
@@ -100,6 +107,10 @@ class GildedRose {
     }
     
     private Item validateAgedBrieItem(Item item) {
+    	return itemInStandardQualityRange(item);
+    }
+    
+    private Item validateConjuredItem(Item item) {
     	return itemInStandardQualityRange(item);
     }
     
@@ -152,10 +163,23 @@ class GildedRose {
 
 	private Item updateBasicItem(Item item) {
 		if (item.sellIn < 0) {
-			item.quality -=2 ;
+			item.quality -=2;
 		}
 		else {
 			item.quality--;
+		}
+		
+		item.sellIn--;		
+		
+		return validateMinQuality(item);
+	}
+	
+	private Item updateConjuredItem(Item item) {
+		if (item.sellIn < 0) {
+			item.quality -= 4;
+		}
+		else {
+			item.quality -= 2;
 		}
 		
 		item.sellIn--;		
@@ -177,23 +201,21 @@ class GildedRose {
     	else if (itemName.contains(AGEDBRIE)) {
     		itemType = AGEDBRIE;
     	}
+    	else if (itemName.contains(CONJURED)) {
+    		itemType = CONJURED;
+    	}
     	
     	return itemType;
     }
     
     
-    //TODO Issue-2: Implement. Cast the array to an Arraylist, call list.add, cast the Arraylist back to an array
-    //the turn the items array into a new array created from list.toArray. Make sure not to lose order of the array
-    //The New item should always be at the end of the array, with the array size going up by 1.
+    //TODO Issue-12: Implement.
     /*public void addToItems(Item item){
      * 
      * }
      */
     
-    //TODO Issue-2: Implement. Cast the array to an Arraylist, call list.remove(reference), cast the Arraylist back to an array
-    //the turn the items array into a new array created from list.toArray. Make sure not to lose order of the array
-    //Items before the removed item should maintain their place in the array, items after the removed item should have moved up one spot,
-    //with the array size decreasing by 1.
+    //TODO Issue-2: Implement.
     /*public void removeFromItems(int reference){
      * 
      * }

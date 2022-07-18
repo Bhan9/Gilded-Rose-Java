@@ -57,6 +57,21 @@ class GildedRoseTest {
         assertEquals(13, updatedItem.quality);
         assertEquals(0, updatedItem.sellIn);
     }
+    
+    @Test
+    void conjuredItemOneUpdate() {
+    	String conjuredItemName = "Conjured Item";
+    	Item conjuredItem = new Item(conjuredItemName, 1, 10);
+        Item[] items = new Item[] { conjuredItem };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+                
+        Item updatedItem = app.items[0];
+        
+        assertEquals(conjuredItemName, updatedItem.name);
+        assertEquals(8, updatedItem.quality);
+        assertEquals(0, updatedItem.sellIn);
+    }
 
     //More comprehensive test cases using multiple item types, days, and covering edge cases
 
@@ -124,9 +139,12 @@ class GildedRoseTest {
     	String sulfurasItemName = "Sulfuras";
     	Item sulfurasItem = new Item(sulfurasItemName, 1, 10);
     	
+    	String conjuredItemName = "Conjured Item";
+    	Item conjuredItem = new Item(conjuredItemName, 1, 10);
+    	
         Item[] items = new Item[] { basicItemPositiveDay, basicItemNegativeDay, agedBrieItemPositiveDay, agedBrieItemNegativeeDay,
         		backstagePassItemEleven, backstagePassItemSix, backstagePassItemTomorrow, backstagePassItemToday,
-        		backstagePassItemEventDone, sulfurasItem};
+        		backstagePassItemEventDone, sulfurasItem, conjuredItem};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -153,6 +171,9 @@ class GildedRoseTest {
         
         //Sulfuras
         assertEquals(80, app.items[9].quality);
+        
+        //Conjured
+        assertEquals(8, app.items[10].quality);
     }
 
     @Test
@@ -272,6 +293,29 @@ class GildedRoseTest {
         assertEquals(0, app.items[3].quality);
         assertEquals(0, app.items[4].quality);
     
+    }
+    
+    @Test
+    void conjuredItemMultipleUpdate() {
+    	String conjuredItemName = "Conjured Item";
+    	Item conjuredItem = new Item(conjuredItemName, 1, 10);
+        Item[] items = new Item[] { conjuredItem };
+        GildedRose app = new GildedRose(items);
+        
+        app.updateQuality();                
+        Item updatedItem = app.items[0];        
+        assertEquals(8, updatedItem.quality);
+        assertEquals(0, updatedItem.sellIn);
+        
+        app.updateQuality();                
+        updatedItem = app.items[0];        
+        assertEquals(6, updatedItem.quality);
+        assertEquals(-1, updatedItem.sellIn);
+        
+        app.updateQuality();                
+        updatedItem = app.items[0];        
+        assertEquals(2, updatedItem.quality);
+        assertEquals(-2, updatedItem.sellIn);          
     }
 
 }

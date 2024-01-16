@@ -3,6 +3,7 @@ package com.gildedrose;
 import java.util.logging.Logger;
 
 class GildedRose {
+    //TODO: ISSUE-14 Declaration of legacy 'Item' object
     Item[] items;
     
     private Logger log = Logger.getLogger(GildedRose.class.getName());
@@ -17,14 +18,15 @@ class GildedRose {
     private final int MAXQUALITY = 50;
     private final int MINQUALITY = 0;
     
-
+    //TODO: ISSUE-14 Declaration of legacy 'Item' object
     public GildedRose(Item[] items) {
         this.items = validateItems(items);
     }
 
     public void updateQuality() {    	
     	for (int i = 0; i < items.length; i++) {
-    	
+
+            //TODO: ISSUE-14 Declaration of legacy 'Item' object
     		Item currentItem = items[i];
     		String itemType = getItemType(currentItem);
     		
@@ -51,7 +53,8 @@ class GildedRose {
     	}
     	
     }
-    
+
+    //TODO: ISSUE-14 Declaration of legacy 'Item' object
     private Item[] validateItems(Item[] items){
      
          	for (int i = 0; i < items.length; i++) {
